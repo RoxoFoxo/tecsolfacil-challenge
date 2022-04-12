@@ -6,9 +6,18 @@ defmodule TecsolfacilWeb.AddressView do
     render_one(address, AddressView, "address.json")
   end
 
-  def render("address.json", %{address: address}) do
+  def render("address.json", %{address: a}) do
     %{
-      cep: address.cep
+      cep: a.cep,
+      logradouro: a.logradouro,
+      complemento: a.complemento,
+      bairro: a.bairro,
+      localidade: a.localidade,
+      uf: a.uf,
+      ibge: a.ibge,
+      gia: a.gia,
+      ddd: a.ddd,
+      siafi: a.siafi
     }
   end
 end

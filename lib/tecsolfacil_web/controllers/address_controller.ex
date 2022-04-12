@@ -5,8 +5,9 @@ defmodule TecsolfacilWeb.AddressController do
 
   action_fallback TecsolfacilWeb.FallbackController
 
-  def show(conn, %{"id" => id}) do
-    address = Infos.get_address!(id)
-    render(conn, "show.json", address: address)
+  def show(conn, %{"cep" => cep}) do
+    with {:ok, address} <- Infos.get_address(cep) do
+      render(conn, "show.json", address: address)
+    end
   end
 end
