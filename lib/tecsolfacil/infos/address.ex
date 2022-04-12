@@ -1,4 +1,5 @@
 defmodule Tecsolfacil.Infos.Address do
+  @moduledoc false
   use Ecto.Schema
   import Ecto.Changeset
 
