@@ -6,6 +6,8 @@ defmodule TecsolfacilWeb.AddressController do
   action_fallback TecsolfacilWeb.FallbackController
 
   def show(conn, %{"cep" => cep}) do
+    # %{email: email} = Guardian.Plug.current_resource(conn)
+
     with {:ok, address} <- Infos.get_address(cep) do
       render(conn, "show.json", address: address)
     end

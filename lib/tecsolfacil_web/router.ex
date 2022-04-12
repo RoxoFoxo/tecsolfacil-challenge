@@ -5,8 +5,24 @@ defmodule TecsolfacilWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :auth do
+    plug Guardian.Plug.Pipeline,
+      module: Tecsolfacil.Guardian,
+      error_handler: TecsolfacilWeb.FallbackController
+
+    plug Guardian.Plug.VerifyHeader, claims: %{"typ" => "access"}
+    plug Guardian.Plug.EnsureAuthenticated
+    plug Guardian.Plug.LoadResource
+  end
+
   scope "/api", TecsolfacilWeb, as: :api do
     pipe_through :api
+
+    post "/users/login", UserSessionController, :create
+  end
+
+  scope "/api", TecsolfacilWeb, as: :api do
+    pipe_through [:api, :auth]
 
     get "/addresses/:cep", AddressController, :show
   end
