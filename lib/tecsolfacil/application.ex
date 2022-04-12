@@ -24,6 +24,7 @@ defmodule Tecsolfacil.Application do
     # for other strategies and supported options
     opts = [strategy: :one_for_one, name: Tecsolfacil.Supervisor]
     Supervisor.start_link(children, opts)
+    Finch.start_link(name: ViacepFinch)
   end
 
   # Tell Phoenix to update the endpoint configuration
