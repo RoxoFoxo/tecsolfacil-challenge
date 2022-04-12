@@ -1,4 +1,5 @@
 defmodule Tecsolfacil.Accounts do
+  @moduledoc false
   import Ecto.Query, warn: false
   alias Tecsolfacil.Repo
 
