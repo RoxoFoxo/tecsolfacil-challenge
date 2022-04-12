@@ -33,6 +33,7 @@ defmodule Tecsolfacil.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      {:csv, "~> 2.4"},
       {:bcrypt_elixir, "~> 2.0"},
       {:guardian, "~> 2.0"},
       {:hammox, "~> 0.5", only: :test},
