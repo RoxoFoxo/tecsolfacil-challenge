@@ -7,6 +7,10 @@
 # General application configuration
 import Config
 
+config :tecsolfacil, Tecsolfacil.Guardian,
+  issuer: "tecsolfacil",
+  secret_key: "VHRzExwoug+w/xoGuR+EPW4iUavOlx9M0ra6yoYZJ6QZmHTjeg16/Y8fKRP/v6dL"
+
 config :tecsolfacil,
   ecto_repos: [Tecsolfacil.Repo]
 
