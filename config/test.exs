@@ -1,7 +1,6 @@
 import Config
 
-config :tecsolfacil,
-  :viacep_client, Tecsolfacil.ViacepClient.Mock
+config :tecsolfacil, :viacep_client, Tecsolfacil.ViacepClient.Mock
 
 # Configure your database
 #

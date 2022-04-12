@@ -52,12 +52,12 @@ defmodule Tecsolfacil.Infos do
   end
 
   defp handle_cep(cep) do
-    unless String.match?(cep, ~r'-') do
+    if String.match?(cep, ~r'-') do
+      cep
+    else
       cep
       |> String.split_at(5)
       |> then(fn {x, y} -> x <> "-" <> y end)
-    else
-      cep
     end
   end
 
