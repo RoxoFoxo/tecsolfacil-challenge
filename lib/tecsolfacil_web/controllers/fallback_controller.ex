@@ -31,6 +31,13 @@ defmodule TecsolfacilWeb.FallbackController do
     |> render(:"400")
   end
 
+  def call(conn, {:error, :unknown_error}) do
+    conn
+    |> put_status(500)
+    |> put_view(TecsolfacilWeb.ErrorView)
+    |> render(:"500")
+  end
+
   def auth_error(conn, {_type, _reason}, _opts) do
     conn
     |> put_status(:unauthorized)
