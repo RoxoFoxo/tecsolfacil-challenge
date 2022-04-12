@@ -33,6 +33,8 @@ defmodule Tecsolfacil.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      {:hammox, "~> 0.5", only: :test},
+      {:finch, "~> 0.11"},
       {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
       {:phoenix, "~> 1.6.6"},
       {:phoenix_ecto, "~> 4.4"},
