@@ -20,7 +20,7 @@ defmodule Tecsolfacil.MixProject do
   def application do
     [
       mod: {Tecsolfacil.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:guardian, :logger, :runtime_tools]
     ]
   end
 

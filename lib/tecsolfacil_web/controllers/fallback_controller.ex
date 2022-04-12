@@ -6,6 +6,8 @@ defmodule TecsolfacilWeb.FallbackController do
   """
   use TecsolfacilWeb, :controller
 
+  @behaviour Guardian.Plug.ErrorHandler
+
   # This clause handles errors returned by Ecto's insert/update/delete.
   def call(conn, {:error, %Ecto.Changeset{} = changeset}) do
     conn
@@ -27,5 +29,12 @@ defmodule TecsolfacilWeb.FallbackController do
     |> put_status(:bad_request)
     |> put_view(TecsolfacilWeb.ErrorView)
     |> render(:"400")
+  end
+
+  def auth_error(conn, {_type, _reason}, _opts) do
+    conn
+    |> put_status(:unauthorized)
+    |> put_view(TecsolfacilWeb.ErrorView)
+    |> render(:"401")
   end
 end
