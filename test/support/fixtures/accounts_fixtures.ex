@@ -19,4 +19,3 @@ defmodule Tecsolfacil.AccountsFixtures do
     user
   end
 end
-
