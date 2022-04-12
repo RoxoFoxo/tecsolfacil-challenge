@@ -9,18 +9,7 @@ defmodule Tecsolfacil.Infos do
   alias Tecsolfacil.Repo
   alias Tecsolfacil.ViacepClient
 
-  @doc """
-  Returns the list of addresses.
-
-  ## Examples
-
-      iex> list_addresses()
-      [%Address{}, ...]
-
-  """
-  def list_addresses do
-    Repo.all(Address)
-  end
+  @info_fields ~w[bairro cep complemento ddd gia ibge localidade logradouro siafi uf]a
 
   @doc """
   Gets a single address.
@@ -77,5 +66,16 @@ defmodule Tecsolfacil.Infos do
     %Address{}
     |> Address.changeset(attrs)
     |> Repo.insert()
+  end
+
+  def list_addresses_into_csv do
+    Address
+    |> Repo.all()
+    |> Enum.map(&Map.take(&1, @info_fields))
+    |> Enum.map(&Map.values(&1))
+    |> then(fn x -> [@info_fields | x] end)
+    |> CSV.encode()
+    |> Enum.join()
+    |> String.trim()
   end
 end
