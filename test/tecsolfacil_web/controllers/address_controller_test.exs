@@ -44,12 +44,13 @@ defmodule TecsolfacilWeb.AddressControllerTest do
 
       cep = "invalid-cep"
 
-      conn =
+      result =
         conn
         |> put_req_header("authorization", "Bearer " <> token)
         |> get(Routes.api_address_path(conn, :show, cep))
+        |> json_response(400)
 
-      assert response(conn, 400)
+      assert result == %{"errors" => %{"detail" => "Bad Request"}}
     end
 
     test "returns not_found error when cep doesn't exist", %{conn: conn} do
@@ -60,12 +61,13 @@ defmodule TecsolfacilWeb.AddressControllerTest do
 
       cep = "00000000"
 
-      conn =
+      result =
         conn
         |> put_req_header("authorization", "Bearer " <> token)
         |> get(Routes.api_address_path(conn, :show, cep))
+        |> json_response(404)
 
-      assert response(conn, 404)
+      assert result == %{"errors" => %{"detail" => "Not Found"}}
     end
 
     test "returns unauthorized error when token is invalid", %{conn: conn} do
@@ -73,12 +75,13 @@ defmodule TecsolfacilWeb.AddressControllerTest do
 
       cep = "01207-000"
 
-      conn =
+      result =
         conn
         |> put_req_header("authorization", "Bearer " <> invalid_token)
         |> get(Routes.api_address_path(conn, :show, cep))
+        |> json_response(401)
 
-      assert response(conn, 401)
+      assert result == %{"errors" => %{"detail" => "Unauthorized"}}
     end
   end
 end

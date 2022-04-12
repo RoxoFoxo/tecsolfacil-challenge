@@ -14,10 +14,10 @@ defmodule Tecsolfacil.ViacepClient.API do
     Logger.debug(inspect(request, pretty: true))
 
     with {:ok, %{body: body, status: 200}} <- request,
-         {:ok, %{cep: _cep} = decoded_body} <- Jason.decode(body) do
+         {:ok, %{"cep" => _cep} = decoded_body} <- Jason.decode(body) do
       {:ok, decoded_body}
     else
-      {:ok, %{"erro" => true}} ->
+      {:ok, %{"erro" => "true"}} ->
         {:error, :not_found}
 
       {:ok, %{status: 400}} ->
@@ -25,7 +25,7 @@ defmodule Tecsolfacil.ViacepClient.API do
 
       error ->
         Logger.error(inspect(error))
-        {:error, :unkown_error}
+        {:error, :unknown_error}
     end
   end
 end
