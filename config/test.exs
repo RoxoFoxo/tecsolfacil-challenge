@@ -1,5 +1,7 @@
 import Config
 
+config :tecsolfacil, Oban, testing: :inline
+
 config :tecsolfacil, :viacep_client, Tecsolfacil.ViacepClient.Mock
 
 # Configure your database

@@ -7,6 +7,11 @@
 # General application configuration
 import Config
 
+config :tecsolfacil, Oban,
+  repo: Tecsolfacil.Repo,
+  plugins: [Oban.Plugins.Pruner],
+  queues: [default: 10, csv: 30]
+
 config :tecsolfacil, Tecsolfacil.Guardian,
   issuer: "tecsolfacil",
   secret_key: "VHRzExwoug+w/xoGuR+EPW4iUavOlx9M0ra6yoYZJ6QZmHTjeg16/Y8fKRP/v6dL"
