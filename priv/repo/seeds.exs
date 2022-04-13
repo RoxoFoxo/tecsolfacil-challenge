@@ -14,6 +14,6 @@ alias Tecsolfacil.Accounts.User
 
 %User{
   email: "test@example.com",
-  hashed_password: "lol123456789"
+  hashed_password: Bcrypt.hash_pwd_salt("lol123456789")
 }
 |> Repo.insert!()
