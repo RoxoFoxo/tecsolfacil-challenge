@@ -1,6 +1,7 @@
 import Config
 
-config :tecsolfacil, Oban, testing: :inline
+config :tecsolfacil, Oban,
+  queues: false, plugins: false
 
 config :tecsolfacil, :viacep_client, Tecsolfacil.ViacepClient.Mock
 

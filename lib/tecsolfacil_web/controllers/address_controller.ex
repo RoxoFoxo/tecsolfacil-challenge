@@ -15,12 +15,9 @@ defmodule TecsolfacilWeb.AddressController do
 
   # Temporary
   def export(conn, _params) do
-    csv_data = Infos.list_addresses_into_csv()
+    Infos.list_addresses_into_csv()
 
-    conn
-    |> put_resp_content_type("text/csv")
-    |> put_resp_header("content-disposition", "attachment; filename=\"export.csv\"")
-    |> put_root_layout(false)
-    |> send_resp(200, csv_data)
+    # Edit view later, make it look more professional or something
+    render(conn, "export.json")
   end
 end

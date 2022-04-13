@@ -8,8 +8,7 @@ defmodule Tecsolfacil.Infos do
   alias Tecsolfacil.Infos.Address
   alias Tecsolfacil.Repo
   alias Tecsolfacil.ViacepClient
-
-  @info_fields ~w[bairro cep complemento ddd gia ibge localidade logradouro siafi uf]a
+  alias Tecsolfacil.Workers.GenerateCSV
 
   @doc """
   Gets a single address.
@@ -69,13 +68,8 @@ defmodule Tecsolfacil.Infos do
   end
 
   def list_addresses_into_csv do
-    Address
-    |> Repo.all()
-    |> Enum.map(&Map.take(&1, @info_fields))
-    |> Enum.map(&Map.values(&1))
-    |> then(fn x -> [@info_fields | x] end)
-    |> CSV.encode()
-    |> Enum.join()
-    |> String.trim()
+    %{}
+    |> GenerateCSV.new()
+    |> Oban.insert()
   end
 end

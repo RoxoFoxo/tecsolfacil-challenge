@@ -20,4 +20,10 @@ defmodule TecsolfacilWeb.AddressView do
       siafi: a.siafi
     }
   end
+
+  def render("export.json", _params) do
+    %{
+      message: "Um email com o CSV de todos os endereços será enviado para você"
+    }
+  end
 end
