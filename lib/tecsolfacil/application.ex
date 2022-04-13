@@ -37,6 +37,6 @@ defmodule Tecsolfacil.Application do
   end
 
   defp oban_config do
-    Application.fetch_env!(:my_app, Oban)
+    Application.fetch_env!(:tecsolfacil, Oban)
   end
 end
