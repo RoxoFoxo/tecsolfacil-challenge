@@ -24,8 +24,8 @@ defmodule TecsolfacilWeb.Router do
   scope "/api", TecsolfacilWeb, as: :api do
     pipe_through [:api, :auth]
 
+    get "/addresses/export", AddressController, :export
     get "/addresses/:cep", AddressController, :show
-    post "/addresses/export", AddressController, :export
   end
 
   # Enables LiveDashboard only for development

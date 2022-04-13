@@ -84,4 +84,31 @@ defmodule TecsolfacilWeb.AddressControllerTest do
       assert result == %{"errors" => %{"detail" => "Unauthorized"}}
     end
   end
+
+  describe "export/2" do
+    test "returns accepted when token is valid", %{conn: conn} do
+      user = user_fixture()
+      {:ok, token, _claims} = encode_and_sign(user, %{typ: "access"})
+
+      result =
+        conn
+        |> put_req_header("authorization", "Bearer " <> token)
+        |> get(Routes.api_address_path(conn, :export))
+        |> json_response(202)
+
+      assert result == %{"detail" => "Accepted"}
+    end
+
+    test "returns unauthorized when token is invalid", %{conn: conn} do
+      invalid_token = "invalid token"
+
+      result =
+        conn
+        |> put_req_header("authorization", "Bearer " <> invalid_token)
+        |> get(Routes.api_address_path(conn, :export))
+        |> json_response(401)
+
+      assert result == %{"errors" => %{"detail" => "Unauthorized"}}
+    end
+  end
 end

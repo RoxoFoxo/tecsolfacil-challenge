@@ -1,7 +1,7 @@
 defmodule Tecsolfacil.AccountsFixtures do
   @moduledoc """
   This module defines test helpers for creating
-  entities via the `Plugfacil.Accounts` context.
+  entities via the `Tecsolfacil.Accounts` context.
   """
 
   @doc """

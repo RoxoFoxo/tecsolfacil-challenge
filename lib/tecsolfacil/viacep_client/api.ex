@@ -17,7 +17,12 @@ defmodule Tecsolfacil.ViacepClient.API do
          {:ok, %{"cep" => _cep} = decoded_body} <- Jason.decode(body) do
       {:ok, decoded_body}
     else
-      {:ok, %{"erro" => "true"}} ->
+      # Someone decided it would be cool to make it randomly return
+      # "true" either as a boolean or string from the API when CEP is invalid.
+      # Seriously, just check these two links:
+      # https://viacep.com.br/ws/00000000/json/
+      # https://viacep.com.br/ws/99999999/json/
+      {:ok, %{"erro" => _true}} ->
         {:error, :not_found}
 
       {:ok, %{status: 400}} ->

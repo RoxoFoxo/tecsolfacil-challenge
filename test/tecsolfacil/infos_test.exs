@@ -2,6 +2,7 @@ defmodule Tecsolfacil.InfosTest do
   use Tecsolfacil.DataCase
   use Oban.Testing, repo: Tecsolfacil.Repo
 
+  import Tecsolfacil.AddressesFixtures
   import Tecsolfacil.Expectations
 
   alias Tecsolfacil.Infos
@@ -19,8 +20,6 @@ defmodule Tecsolfacil.InfosTest do
     "siafi" => "7107",
     "uf" => "SP"
   }
-
-  # @csv_string "bairro,cep,complemento,ddd,gia,ibge,localidade,logradouro,siafi,uf\r\nSanta Efigênia,01207-000,lado par,11,1004,3550308,São Paulo,Rua Santa Efigênia,7107,SP"
 
   describe "get_address/1" do
     test "gets and saves info of an address and shows it when searched again" do
@@ -98,15 +97,13 @@ defmodule Tecsolfacil.InfosTest do
     end
   end
 
-  describe "list_addresses_into_csv/0" do
-    test "lists all addresses into the csv with their fields" do
-      Infos.create_address(@address_info)
+  describe "list_addresses_into_csv/1" do
+    test "queues a worker" do
+      address_fixture()
 
-      Infos.list_addresses_into_csv()
+      Infos.list_addresses_into_csv("test@example.com")
 
-      assert_enqueued(
-        worker: Tecsolfacil.Workers.GenerateCSV
-      )
+      assert_enqueued(worker: Tecsolfacil.Workers.GenerateCSV)
     end
   end
 end
