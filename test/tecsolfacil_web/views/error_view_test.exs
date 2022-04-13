@@ -18,4 +18,9 @@ defmodule TecsolfacilWeb.ErrorViewTest do
     assert render(TecsolfacilWeb.ErrorView, "400.json", []) ==
              %{errors: %{detail: "Bad Request"}}
   end
+
+  test "renders 401.json" do
+    assert render(TecsolfacilWeb.ErrorView, "401.json", []) ==
+             %{errors: %{detail: "Unauthorized"}}
+  end
 end

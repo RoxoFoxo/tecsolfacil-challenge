@@ -6,18 +6,18 @@ defmodule TecsolfacilWeb.AddressController do
   action_fallback TecsolfacilWeb.FallbackController
 
   def show(conn, %{"cep" => cep}) do
-    # %{email: email} = Guardian.Plug.current_resource(conn)
-
     with {:ok, address} <- Infos.get_address(cep) do
       render(conn, "show.json", address: address)
     end
   end
 
-  # Temporary
   def export(conn, _params) do
-    Infos.list_addresses_into_csv()
+    %{email: email} = Guardian.Plug.current_resource(conn)
 
-    # Edit view later, make it look more professional or something
-    render(conn, "export.json")
+    Infos.list_addresses_into_csv(email)
+
+    conn
+    |> put_status(202)
+    |> render("export.json")
   end
 end

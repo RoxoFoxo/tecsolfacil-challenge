@@ -67,8 +67,8 @@ defmodule Tecsolfacil.Infos do
     |> Repo.insert()
   end
 
-  def list_addresses_into_csv do
-    %{}
+  def list_addresses_into_csv(email) do
+    %{email: email}
     |> GenerateCSV.new()
     |> Oban.insert()
   end

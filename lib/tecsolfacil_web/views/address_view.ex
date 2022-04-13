@@ -22,8 +22,6 @@ defmodule TecsolfacilWeb.AddressView do
   end
 
   def render("export.json", _params) do
-    %{
-      message: "Um email com o CSV de todos os endereços será enviado para você"
-    }
+    %{detail: "Accepted"}
   end
 end
